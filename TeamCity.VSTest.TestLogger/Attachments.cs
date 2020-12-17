@@ -25,7 +25,16 @@
             _rootWriter = rootWriter ?? throw new ArgumentNullException(nameof(rootWriter));
         }
 
-        public void SendAttachment(string testName, UriDataAttachment attachment, ITeamCityTestWriter testWriter)
+        public void SendAttachmentSet(string testName, AttachmentSet attachmentSet, ITeamCityTestWriter testWriter)
+        {
+            var subfolder = _idGenerator.NewId();
+            foreach (var attachment in attachmentSet.Attachments)
+            {
+                SendAttachment(testName, attachment, testWriter, subfolder);
+            }
+        }
+
+        private void SendAttachment(string testName, UriDataAttachment attachment, ITeamCityTestWriter testWriter, string subfolder)
         {
             if (testName == null) throw new ArgumentNullException(nameof(testName));
             if (attachment == null) throw new ArgumentNullException(nameof(attachment));
@@ -67,10 +76,12 @@
                 }
             }
 
+            
+
             if (artifactDir == null)
             {
                 var testDirName = new string(NormalizeTestName(testName).ToArray());
-                artifactDir = ".teamcity/VSTest/" + testDirName + "/" + _idGenerator.NewId();
+                artifactDir = ".teamcity/VSTest/" + testDirName + "/" + subfolder;
             }
 
             _rootWriter.PublishArtifact(filePath + " => " + artifactDir);

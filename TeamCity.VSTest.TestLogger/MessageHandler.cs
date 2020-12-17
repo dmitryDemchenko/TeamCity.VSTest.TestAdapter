@@ -77,10 +77,7 @@
 
                 foreach (var attachments in result.Attachments)
                 {
-                    foreach (var attachment in attachments.Attachments)
-                    {
-                        _attachments.SendAttachment(testName, attachment, testWriter);
-                    }
+                    _attachments.SendAttachmentSet(testName, attachments, testWriter);
                 }
 
                 switch (result.Outcome)

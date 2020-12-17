@@ -5,6 +5,6 @@
 
     internal interface IAttachments
     {
-        void SendAttachment([NotNull] string testName, [NotNull] UriDataAttachment attachment, [NotNull] ITeamCityTestWriter testWriter);
+        void SendAttachmentSet([NotNull] string testName, [NotNull] AttachmentSet attachmentSet, [NotNull] ITeamCityTestWriter testWriter);
     }
 }
