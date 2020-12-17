@@ -51,11 +51,6 @@
                 <AssemblyName>TeamCity.VSTest.TestAdapter</AssemblyName>
             </VSTestVersion>
 
-            <VSTestVersion Include="vstest12">
-                <TargetFramework>net35</TargetFramework>
-                <VSTestLoggerPath>vstest12</VSTestLoggerPath>
-                <AssemblyName>TeamCity.VSTest.TestAdapter</AssemblyName>
-            </VSTestVersion>
         </ItemGroup>
 
         <RemoveDir Directories="$(BinPath)" />
