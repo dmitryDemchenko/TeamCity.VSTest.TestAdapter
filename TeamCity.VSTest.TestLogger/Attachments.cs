@@ -46,6 +46,14 @@
                 return;
             }
 
+            var subresource = "";
+            if (attachment.Uri.LocalPath.Contains("!"))
+            {
+                var exclamationPosition = attachment.Uri.LocalPath.IndexOf("!");
+                subresource = attachment.Uri.LocalPath.Substring(exclamationPosition);
+                attachment = new UriDataAttachment( new Uri(attachment.Uri.OriginalString.Substring(0, exclamationPosition)), attachment.Description);
+            }
+
             if (!attachment.Uri.IsFile)
             {
                 return;
@@ -85,7 +93,7 @@
             }
 
             _rootWriter.PublishArtifact(filePath + " => " + artifactDir);
-            var artifact = artifactDir + "/" + fileName;
+            var artifact = artifactDir + "/" + fileName + subresource;
             switch (fileExtension)
             {
                 case ".bmp":
