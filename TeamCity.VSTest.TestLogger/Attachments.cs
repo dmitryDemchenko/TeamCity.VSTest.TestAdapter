@@ -47,10 +47,10 @@
             }
 
             var subresource = "";
-            if (attachment.Uri.LocalPath.Contains("!"))
+            if (attachment.Uri.OriginalString.Contains("!"))
             {
-                var exclamationPosition = attachment.Uri.LocalPath.IndexOf("!");
-                subresource = attachment.Uri.LocalPath.Substring(exclamationPosition);
+                var exclamationPosition = attachment.Uri.OriginalString.IndexOf("!");
+                subresource = attachment.Uri.OriginalString.Substring(exclamationPosition);
                 attachment = new UriDataAttachment( new Uri(attachment.Uri.OriginalString.Substring(0, exclamationPosition)), attachment.Description);
             }
 
